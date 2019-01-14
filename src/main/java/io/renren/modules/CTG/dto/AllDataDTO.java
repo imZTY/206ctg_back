@@ -103,35 +103,35 @@ public class AllDataDTO {
     /* ================ 数据变量 begin ================= */
 
     /**
-     * LB
+     * baseLine
      基线值
      （bpm）
      */
     private int LB = 0;
 
     /**
-     * LTV
+     * FHRVAR
      长变异
      （bpm）
      */
     private int LTV = 0;
 
     /**
-     * PV
+     * FHRCYCLE
      周期变异
      (bpm)
      */
     private int PV = 0;
 
     /**
-     * AC
+     * FHRFAST
      加速
      （次/秒）
      */
     private int AC = 0;
 
     /**
-     * DC
+     * FHSLOW
      减速
      （次/秒）
      */
@@ -180,14 +180,14 @@ public class AllDataDTO {
     private int DS = 0;
 
     /**
-     * FM
+     * FMOVE
      胎动
      （次/秒）
      */
     private int FM = 0;
 
     /**
-     * UC
+     * UCTIMES
      子宫收缩
      （次/秒）
      */
@@ -201,7 +201,7 @@ public class AllDataDTO {
     private int AI = 0;
 
     /**
-     * AA
+     * FAETVALUE
      加速幅度
      （bpm)
      */
@@ -215,14 +215,14 @@ public class AllDataDTO {
     private Double STV = 0.0;
 
     /**
-     * HVT
+     * HIGHLTV
      高变异时间
      （分钟）
      */
     private int HVT = 0;
 
     /**
-     * LVT
+     * LOWLTV
      低变异时间
      （分钟）
      */

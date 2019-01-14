@@ -136,54 +136,54 @@ public class CTGData {
     /* ================ 数据变量 begin ================= */
 
     /**
-     * LB
+     * BASELINE
      基线值
      （bpm）
      */
     @NotNull
     @Min(0)
-    private int LB = 0;
+    private int baseLine = 0;
 
     /**
-     * LTV
-     长变异
+     * FHRVAR
+     变异
      （bpm）
      */
     @NotNull
     @Min(0)
-    private int LTV = 0;
+    private int FHRVAR = 0;
 
     /**
-     * PV
+     * FHRCYCLE
      周期变异
      (bpm)
      */
     @NotNull
     @Min(0)
-    private int PV = 0;
+    private int FHRCYCLE = 0;
 
     /**
-     * AC
+     * FHRFAST
      加速
-     （次/秒）
+     （次）
      */
     @NotNull
     @Min(0)
-    private int AC = 0;
+    private int FHRFAST = 0;
 
     /**
-     * DC
+     * FHSLOW
      减速
-     （次/秒）
+     （次）
      */
     @NotNull
     @Min(0)
-    private int DC = 0;
+    private int FHSLOW = 0;
 
     /**
      * ED
      早减
-     (次/秒)
+     (次)
      */
     @NotNull
     @Min(0)
@@ -192,7 +192,7 @@ public class CTGData {
     /**
      * LD
      晚减
-     (次/秒)
+     (次)
      */
     @NotNull
     @Min(0)
@@ -201,7 +201,7 @@ public class CTGData {
     /**
      * VD
      变异减速
-     (次/秒）
+     (次）
      */
     @NotNull
     @Min(0)
@@ -210,7 +210,7 @@ public class CTGData {
     /**
      * DP
      延长减速
-     （次/秒）
+     （次）
      */
     @NotNull
     @Min(0)
@@ -219,7 +219,7 @@ public class CTGData {
     /**
      * DL
      轻减速
-     （次/秒）
+     （次）
      */
     @NotNull
     @Min(0)
@@ -228,82 +228,83 @@ public class CTGData {
     /**
      * DS
      严重的减速
-     （次/秒）
+     （次）
      */
     @NotNull
     @Min(0)
     private int DS = 0;
 
     /**
-     * FM
+     * FMOVE
      胎动
-     （次/秒）
+     （次）
      */
     @NotNull
     @Min(0)
-    private int FM = 0;
+    private int FMOVE = 0;
 
     /**
-     * UC
+     * UCTIMES
      子宫收缩
-     （次/秒）
+     （次）
      */
     @NotNull
     @Min(0)
-    private int UC = 0;
+    private int UCTIMES = 0;
 
     /**
-     * AT
+     * FASTTIME
      加速时间
      （秒）
      */
     @NotNull
     @Min(0)
-    private int AI = 0;
+    private int FASTTIME = 0;
 
     /**
-     * AA
+     * FAETVALUE
      加速幅度
      （bpm)
      */
     @NotNull
     @Min(0)
-    private int AA = 0;
+    private int FAETVALUE = 0;
 
     /**
      * STV
      短变异时间
-     （秒）
+     （毫秒）
      */
     @NotNull
     @Min(0)
     private Double STV = 0.0;
 
     /**
-     * HVT
+     * HIGHLTV
      高变异时间
      （分钟）
      */
     @NotNull
     @Min(0)
-    private int HVT = 0;
+    private int HIGHLTV = 0;
 
     /**
-     * LVT
+     * LOWLTV
      低变异时间
      （分钟）
      */
     @NotNull
     @Min(0)
-    private int LVT = 0;
+    private int LOWLTV = 0;
 
     /**
+     * HAVEACCDEC
      * 有加速减速时间
-     （分钟）
+     （秒）
      */
     @NotNull
     @Min(0)
-    private int speedChangingTime = 0;
+    private int HAVEACCDEC = 0;
 
     /**
      * 数据丢失率
@@ -313,6 +314,34 @@ public class CTGData {
     @Max(100)
     @Min(0)
     private int lostRate = 0;
+
+    /**
+     * UCSTRONG
+     宫缩强度
+     （%）
+     */
+    @NotNull
+    @Max(100)
+    @Min(0)
+    private int UCSTRONG = 0;
+
+    /**
+     * UCNEXT
+     宫缩间隔
+     (秒）
+     */
+    @NotNull
+    @Min(0)
+    private int UCNEXT = 0;
+
+    /**
+     * UCKTIME
+     宫缩持续时间
+     (秒）
+     */
+    @NotNull
+    @Min(0)
+    private int UCKTIME = 0;
 
     /* ================ 数据变量 end =================== */
 

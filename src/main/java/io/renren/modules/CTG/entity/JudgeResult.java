@@ -33,49 +33,49 @@ public class JudgeResult {
     /* ================ 数据变量 begin ================= */
 
     /**
-     * LB
+     * BASELINE
      基线值
      （bpm）
      */
     @NotNull
     @Min(0)
-    private int LB = 0;
+    private int baseLine = 0;
 
     /**
-     * LTV
-     长变异
+     * FHRVAR
+     变异
      （bpm）
      */
     @NotNull
     @Min(0)
-    private int LTV = 0;
+    private int FHRVAR = 0;
 
     /**
-     * PV
+     * FHRCYCLE
      周期变异
      (bpm)
      */
     @NotNull
     @Min(0)
-    private int PV = 0;
+    private int FHRCYCLE = 0;
 
     /**
-     * AC
+     * FHRFAST
      加速
-     （次/秒）
+     （次）
      */
     @NotNull
     @Min(0)
-    private int AC = 0;
+    private int FHRFAST = 0;
 
     /**
-     * DC
+     * FHSLOW
      减速
-     （次/秒）
+     （次）
      */
     @NotNull
     @Min(0)
-    private int DC = 0;
+    private int FHSLOW = 0;
 
     /**
      * ED
@@ -132,7 +132,7 @@ public class JudgeResult {
     private int DS = 0;
 
     /**
-     * FM
+     * FMOVE
      胎动
      （次/秒）
      */
@@ -141,7 +141,7 @@ public class JudgeResult {
     private int FM = 0;
 
     /**
-     * UC
+     * UCTIMES
      子宫收缩
      （次/秒）
      */
@@ -159,7 +159,7 @@ public class JudgeResult {
     private int AI = 0;
 
     /**
-     * AA
+     * FAETVALUE
      加速幅度
      （bpm)
      */
