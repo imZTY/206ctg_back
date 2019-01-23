@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="io.renren.modules.sys.dao.ctg.ICTGDataDao">
+    <resultMap id="BaseResultMap" type="io.renren.modules.CTG.entity.CTGData" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="ctg_number" property="CTG_number" jdbcType="VARCHAR" />
+        <result column="dl" property="DL" jdbcType="INTEGER" />
+        <result column="dp" property="DP" jdbcType="INTEGER" />
+        <result column="ds" property="DS" jdbcType="INTEGER" />
+        <result column="ed" property="ED" jdbcType="INTEGER" />
+        <result column="fastvalue" property="FASTVALUE" jdbcType="INTEGER" />
+        <result column="fasttime" property="FASTTIME" jdbcType="INTEGER" />
+        <result column="fhrcycle" property="FHRCYCLE" jdbcType="INTEGER" />
+        <result column="fhrfast" property="FHRFAST" jdbcType="INTEGER" />
+        <result column="fhrfast_evaluation_0" property="FHRFAST_EVALUATION_0" jdbcType="INTEGER" />
+        <result column="fhrfast_evaluation_1" property="FHRFAST_EVALUATION_1" jdbcType="INTEGER" />
+        <result column="fhrvar" property="FHRVAR" jdbcType="INTEGER" />
+        <result column="fhslow" property="FHSLOW" jdbcType="INTEGER" />
+        <result column="fhslow_evaluation" property="FHSLOW_EVALUATION" jdbcType="INTEGER" />
+        <result column="fmove" property="FMOVE" jdbcType="INTEGER" />
+        <result column="frh_evaluation" property="FRH_EVALUATION" jdbcType="INTEGER" />
+        <result column="gestational_age" property="gestationalAge" jdbcType="DOUBLE" />
+        <result column="gravida_id" property="gravidaId" jdbcType="INTEGER" />
+        <result column="haveaccdec" property="HAVEACCDEC" jdbcType="INTEGER" />
+        <result column="highltv" property="HIGHLTV" jdbcType="INTEGER" />
+        <result column="ld" property="LD" jdbcType="INTEGER" />
+        <result column="lowltv" property="LOWLTV" jdbcType="INTEGER" />
+        <result column="nst" property="NST" jdbcType="INTEGER" />
+        <result column="nst_evaluation" property="NST_EVALUATION" jdbcType="INTEGER" />
+        <result column="stv" property="STV" jdbcType="DOUBLE" />
+        <result column="ucktime" property="UCKTIME" jdbcType="INTEGER" />
+        <result column="ucnext" property="UCNEXT" jdbcType="INTEGER" />
+        <result column="ucstrong" property="UCSTRONG" jdbcType="INTEGER" />
+        <result column="uctimes" property="UCTIMES" jdbcType="INTEGER" />
+        <result column="var_evaluation" property="VAR_EVALUATION" jdbcType="INTEGER" />
+        <result column="vd" property="VD" jdbcType="INTEGER" />
+        <result column="vdtime" property="VDTIME" jdbcType="INTEGER" />
+        <result column="age" property="age" jdbcType="INTEGER" />
+        <result column="base_line" property="baseLine" jdbcType="INTEGER" />
+        <result column="check_date" property="checkDate" jdbcType="DATE" />
+        <result column="check_place" property="checkPlace" jdbcType="INTEGER" />
+        <result column="device_batch" property="deviceBatch" jdbcType="VARCHAR" />
+        <result column="device_brand" property="deviceBrand" jdbcType="VARCHAR" />
+        <result column="device_edition" property="deviceEdition" jdbcType="VARCHAR" />
+        <result column="expert_read_begin" property="expertReadBegin" jdbcType="INTEGER" />
+        <result column="expert_read_end" property="expertReadEnd" jdbcType="INTEGER" />
+        <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+        <result column="judge_date" property="judgeDate" jdbcType="DATE" />
+        <result column="lost_rate" property="lostRate" jdbcType="INTEGER" />
+        <result column="pakage_number" property="pakageNumber" jdbcType="VARCHAR" />
+        <result column="times" property="times" jdbcType="INTEGER" />
+        <result column="watch_time" property="watchTime" jdbcType="INTEGER" />
+    </resultMap>
+    <delete id="deleteRepeat">
+        DELETE
+        FROM
+            ctgdata
+        WHERE id NOT IN (SELECT temp.id FROM
+                (SELECT
+                    max(id) as id
+                FROM
+                    ctgdata
+                GROUP BY
+                    ctg_number,pakage_number,check_date
+                HAVING
+                    count(ctg_number) > 1
+            ) AS temp)
+
+    </delete>
+
+    <select id="getByPage" resultMap="BaseResultMap" parameterType="io.renren.modules.CTG.entity.PageEntity" >
+        SELECT *
+        FROM ctgdata
+        limit #{pageStart,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
+    </select>
+</mapper>

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -16,7 +17,7 @@ import java.util.Date;
  */
 @Entity
 @Data
-public class CTGData {
+public class CTGData implements Serializable {
     @Id
     @GeneratedValue
     private int id;
@@ -50,17 +51,17 @@ public class CTGData {
      孕妇编号
      （外键）<-实际并不是键
      */
-    @Column(name = "Gravida_ID")
+    @Column(name = "gravidaId")
     @NotNull
-    private int Gravida_ID;
+    private int gravidaId;
 
     /**
      * Gestational Age
      (孕周）
      */
-    @Column(name = "Gestational_Age")
+    @Column(name = "gestationalAge")
     @NotNull
-    private double Gestational_Age;
+    private double gestationalAge;
 
     /**
      * 检测地点
@@ -106,26 +107,29 @@ public class CTGData {
     private String fileName;
 
     /**
-     * 设备商标（品牌）
+     * brand
+     测量仪器品牌
      */
     @NotBlank
     private String deviceBrand = "暂无";
 
     /**
-     * 设备型号（产品版本）
+     * model
+     测量仪器型号
      */
     @NotBlank
     private String deviceEdition = "暂无";
 
     /**
-     * 设备的生产批次信息
+     * batch
+     测量仪器批次（选填）
      */
     private String deviceBatch;
 
     /**
-     * TODO
-     * expertReadBegin 专家判读开始时间戳
-     * expertReadEnd 专家判读结束时间戳
+     * 这里不记录为时间戳是因为数据来源无法转为时间戳
+     * expertReadBegin 专家判读开始时间 BD列
+     * expertReadEnd 专家判读结束时间 BE列
      */
     @NotNull
     private int expertReadBegin = 0;
@@ -262,13 +266,13 @@ public class CTGData {
     private int FASTTIME = 0;
 
     /**
-     * FAETVALUE
+     * FASTVALUE
      加速幅度
      （bpm)
      */
     @NotNull
     @Min(0)
-    private int FAETVALUE = 0;
+    private int FASTVALUE = 0;
 
     /**
      * STV
@@ -343,14 +347,65 @@ public class CTGData {
     @Min(0)
     private int UCKTIME = 0;
 
+    /**
+     * VDTIME
+     变异减速持续时间
+     （秒）
+     */
+    @NotNull
+    @Min(0)
+    private int VDTIME = 0;
+
+    /**
+     * FRH_EVALUATION
+     胎心率评价
+     */
+    private int FRH_EVALUATION = 0;
+
+    /**
+     * VAR_EVALUATION
+     长变异评价
+     */
+    private int VAR_EVALUATION = 0;
+
+    /**
+     * FHSLOW_EVALUATION
+     减速评价
+     */
+    private int FHSLOW_EVALUATION = 0;
+
+    /**
+     * FHRFAST_EVALUATION_1
+     足月加速评价
+     */
+    private int FHRFAST_EVALUATION_1 = 0;
+
+    /**
+     * FHRFAST_EVALUATION_0
+     不足月加速评价
+     */
+    private int FHRFAST_EVALUATION_0 = 0;
+
+    /**
+     * NST_EVALUATION
+     NST处理评价
+     */
+    private int NST_EVALUATION = 0;
+
     /* ================ 数据变量 end =================== */
 
     /**
      * 判读结果
      * NST
-     Fail=4;Normal=1; Suspect=2; Pathologic=3; notyet=0
+     Fail=4; Normal=1; Suspect=2; Pathologic=3; notyet=0
      不满意=0；有反应= 1;可疑= 2;无反应= 3;未判读 = 4
      */
     @NotNull
     private int NST = 4;
+
+    @NotNull
+    private long upTime = 0L;
+
+    @NotBlank
+    private String ctgCode;
 }

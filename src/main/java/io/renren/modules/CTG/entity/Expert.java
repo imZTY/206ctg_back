@@ -10,6 +10,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 
 /**
  * 医师（专家）表
@@ -18,7 +19,7 @@ import javax.validation.constraints.Pattern;
  */
 @Entity
 @Data
-public class Expert {
+public class Expert implements Serializable {
     @Id
     @GeneratedValue
     private int id;

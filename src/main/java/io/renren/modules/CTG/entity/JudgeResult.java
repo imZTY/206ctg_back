@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 判读结果表
@@ -17,18 +19,18 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Data
-public class JudgeResult {
+public class JudgeResult implements Serializable {
     @Id
     @GeneratedValue
     private int id;
 
-    @Column(name = "CTG_ID")
+    @Column(name = "ctgId")
     @NotNull
-    private int CTG_ID;
+    private int ctgId;
 
-    @Column(name = "Expert_ID")
+    @Column(name = "expertId")
     @NotBlank
-    private String Expert_ID;
+    private String expertId;
 
     /* ================ 数据变量 begin ================= */
 
@@ -138,7 +140,7 @@ public class JudgeResult {
      */
     @NotNull
     @Min(0)
-    private int FM = 0;
+    private int FMOVE = 0;
 
     /**
      * UCTIMES
@@ -147,33 +149,35 @@ public class JudgeResult {
      */
     @NotNull
     @Min(0)
-    private int UC = 0;
+    private int UCTIMES = 0;
 
     /**
-     * AT
+     * FASTTIME
      加速时间
      （秒）
      */
     @NotNull
     @Min(0)
-    private int AI = 0;
+    private int FASTTIME = 0;
 
     /**
-     * FAETVALUE
+     * FASTVALUE
      加速幅度
      （bpm)
      */
     @NotNull
     @Min(0)
-    private int AA = 0;
+    private int FASTVALUE = 0;
 
     /* ================ 数据变量 end =================== */
 
     /**
-     * TODO 判读耗时？
+     * 判断日期
+     * Time
+     CTG检验时间
      */
     @NotNull
-    private int costTime = 0;
+    private Date judgeDate;
 
     /**
      * 判读结果
@@ -188,4 +192,10 @@ public class JudgeResult {
      * 备注
      */
     private String notes;
+
+    @NotNull
+    private long upTime = 0L;
+
+    @NotBlank
+    private String ctgCode;
 }
