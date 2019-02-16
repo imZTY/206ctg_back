@@ -3,7 +3,7 @@
 <mapper namespace="io.renren.modules.sys.dao.ctg.IJudgeResultDao">
     <resultMap id="BaseResultMap" type="io.renren.modules.CTG.entity.JudgeResult" >
         <id column="id" property="id" jdbcType="INTEGER" />
-        <result column="ctg_id" property="CTG_ID" jdbcType="INTEGER" />
+        <result column="ctg_id" property="ctgId" jdbcType="INTEGER" />
         <result column="dl" property="DL" jdbcType="INTEGER" />
         <result column="dp" property="DP" jdbcType="INTEGER" />
         <result column="ds" property="DS" jdbcType="INTEGER" />
@@ -37,7 +37,7 @@
                 GROUP BY
                     ctg_code,expert_id,judge_date
                 HAVING
-                    count(ctg_code) > 1
+                    count(ctg_code) >= 1
             ) AS temp)
 
     </delete>

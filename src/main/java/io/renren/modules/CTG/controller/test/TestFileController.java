@@ -48,18 +48,18 @@ public class TestFileController {
         return "ok";
     }
 
-    @GetMapping("/try2")
-    public String fileTry2(){
-        String filePath = "F:\\study\\jidi\\2018\\下\\206数据管理系统\\renren-fast\\FILES\\sqlExcel\\1544968754658.xls";
-        try {
-            System.out.println("try2..");
-            return databaseService.importDataFromExcelFile(filePath,true, 1098L);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return e.getMessage();
-        }
-    }
+//    @GetMapping("/try2")
+//    public String fileTry2(){
+//        String filePath = "F:\\study\\jidi\\2018\\下\\206数据管理系统\\renren-fast\\FILES\\sqlExcel\\1544968754658.xls";
+//        try {
+//            System.out.println("try2..");
+//            return databaseService.importDataFromExcelFile(filePath,true, 1098L, rtMsg.toString());
+//        }
+//        catch (Exception e) {
+//            e.printStackTrace();
+//            return e.getMessage();
+//        }
+//    }
 
     @PostMapping("/up")
     public String uploadF(@RequestParam("testF") MultipartFile file,HttpServletResponse response) {

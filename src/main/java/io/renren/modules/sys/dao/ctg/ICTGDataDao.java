@@ -19,4 +19,8 @@ public interface ICTGDataDao extends BaseMapper<CTGData> {
     List getByPage(PageEntity pageEntity);
 
     int deleteRepeat();
+
+    List getByExpert(PageEntity pageEntity);
+
+    List getByDifferent(PageEntity pageEntity);
 }

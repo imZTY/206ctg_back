@@ -28,9 +28,7 @@ public class JudgeResult implements Serializable {
     @NotNull
     private int ctgId;
 
-    @Column(name = "expertId")
-    @NotBlank
-    private String expertId;
+    private int expertId;
 
     /* ================ 数据变量 begin ================= */
 

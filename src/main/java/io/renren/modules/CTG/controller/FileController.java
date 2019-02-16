@@ -6,12 +6,17 @@ import io.renren.modules.CTG.service.DatabaseService;
 import io.renren.modules.CTG.utils.CommonDTOUtil;
 import io.renren.modules.CTG.utils.FileUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.Target;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.lang.annotation.ElementType;
+
+import static io.renren.common.utils.ShiroUtils.getUserId;
 
 /**
  * @author tianyi
@@ -25,15 +30,25 @@ public class FileController {
     @Autowired
     private DatabaseService databaseService;
 
+//    @Autowired
+//    private SimpMessagingTemplate messagingTemplate; // WebSocket工具类
+
     /**
      * @apiDefine File 文件
      */
+
 
     /**
      *  @apiDefine CommonDTO
      *  @apiSuccess {Integer} resultCode 响应结果
      *  @apiSuccess {String} resultMsg 结果描述
      *  @apiSuccess {Object} data 数据主体
+     */
+
+    /**
+     *  @apiDefine WebSocketDTO
+     *  @apiSuccess {boolean} isOver 是否已经结束
+     *  @apiSuccess {String} message 完整的实况错误日志
      */
 
     /**
@@ -120,6 +135,12 @@ public class FileController {
      * @apiGroup File
      * @apiParam {File} upFile 上传的文件
      * @apiUse CommonDTO
+     * @apiErrorExample Error-Response:
+     * {
+     *      "resultCode": 200,
+    "resultMsg": "成功",
+    "data": "导入 15-20180906-02-05done32523.xls 出现错误\n1. 第 15 行发现年龄为空值;\n2. 第 54 行发现年龄为空值;\n3. 第 93 行发现年龄为空值;\n4. 第 97 行出现错误：Unparseable date: \"abc\";\n\n"
+     * }
      */
     @PostMapping("/up/zip")
     public CommonDTO upExcel(@RequestParam("upFile") MultipartFile upFile,  HttpServletResponse response, PageEntity pageEntity){
@@ -192,9 +213,12 @@ public class FileController {
             });
             for (String xlsFieName:
                     xlsFileNames) {
-                rtMsg.append(databaseService.importDataFromExcelFile(cacheDirPath + "\\" +xlsFieName, true, upTime)).append("\n");
+                rtMsg.append(databaseService.importDataFromExcelFile(cacheDirPath + "\\" +xlsFieName, true, upTime, rtMsg.toString())).append("\n");
             }
 
+            String refresh = "{\"isOver\":true,\"message\":\"" + rtMsg.toString()
+                    +"\"}";
+            // this.messagingTemplate.convertAndSendToUser("" + getUserId(), "/status", refresh);
             return CommonDTOUtil.success(rtMsg.toString());
         } catch  (Exception e){
             e.printStackTrace();

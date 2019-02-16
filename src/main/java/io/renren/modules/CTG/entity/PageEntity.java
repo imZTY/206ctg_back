@@ -11,6 +11,8 @@ import java.io.Serializable;
 @Data
 public class PageEntity implements Serializable {
 
+    private int expertId;
+
     private int[] ids;
 
     private String name;

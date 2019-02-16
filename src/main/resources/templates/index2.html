@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index2</title>
+    <script src="js/sockjs.js"></script>
+    <script src="js/stomp.js"></script>
+    <script src="js/jquery.js"></script>
+</head>
+<body onload="disconnect()">
+<button id="connect" onclick="connect()">连接</button>
+<button id="disconnect" onclick="disconnect()" disabled="disabled">断开连接</button><br/>
+<div id="inputDiv">
+    输入消息：<input type="text" id="name"/><br/>
+    <button id="sendName" onclick="sendName()">发送</button><br/>
+    <p id="response"></p>
+</div>
+<script>
+    var stompClient = null;
+    //设置连接状态控制显示隐藏
+    function setConnected(connected)
+    {
+        $("#connect").attr("disabled",connected);
+        $("#disconnect").attr("disabled",!connected);
+        if(!connected) {
+            $("#inputDiv").hide();
+        }else{
+            $("#inputDiv").show();
+        }
+        $("#reponse").html("");
+    }
+
+    var userId = 1; // 接口【7】(get) https://oathtomylove.top/renren-fast/data/userId
+
+    //连接
+    function connect()
+    {
+        var socket = new SockJS("https://oathtomylove.top/renren-fast/ws_user");
+        stompClient = Stomp.over(socket);
+        stompClient.connect({},function (frame) {
+            setConnected(true);
+            console.log("connected : "+frame);
+            stompClient.subscribe('/ws_deal/' + userId + '/status',function (response) {
+
+                /**
+                 * {
+                 *  "isOver":false,
+                 *  "message":"日志内容"
+                 * }
+                 */
+                refresh(response.body.message); // TODO 待调整
+            })
+        })
+    }
+
+    // 更新错误日志
+    function refresh(data){
+        // 将蒙层下 4/5 的文字内容刷新替换
+    }
+
+    //断开连接
+    function disconnect(){
+        if(stompClient!=null)
+        {
+            stompClient.disconnect();
+        }
+        setConnected(false);
+        console.log("disconnected!");
+    }
+    //发送名称到后台
+    function sendName(){
+        var name = $("#name").val();
+        stompClient.send("/send/byPlayer",{},JSON.stringify({'message':name , 'senderId':1234 , 'senderName': 'world'}));
+    }
+    //显示socket返回消息内容
+    function showResponse(message)
+    {
+        $("#response").html($("#response").html() + message + "<br>");
+    }
+</script>
+</body>
+</html>

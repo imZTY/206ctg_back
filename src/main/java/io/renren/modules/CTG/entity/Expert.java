@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 /**
@@ -27,9 +26,7 @@ public class Expert implements Serializable {
     /**
      * 记录导入数据时的专家id信息
      */
-    @Column(name = "expert_ID")
-    @Pattern(regexp = "\\d+")
-    private String expertID;
+    private int expertId;
 
     /**
      * Grade
